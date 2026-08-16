@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  app:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -lc "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET:-change_me_in_production}
+      REFRESH_SECRET: ${REFRESH_SECRET:-change_me_in_production}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://admin.securenet.com,https://lovable.app}
+      VPS_IP: ${VPS_IP:-203.0.113.10}
+      VPS_DOMAIN: ${VPS_DOMAIN:-api.securenet.com}
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: securenet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+volumes:
+  pgdata:

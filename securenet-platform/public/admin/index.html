@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecureNet Admin</title>
+    <style>
+      :root {
+        --bg: #08111f;
+        --panel: #121d2d;
+        --panel-soft: #17273d;
+        --accent: #28d0b4;
+        --accent-2: #4f8cff;
+        --danger: #fe5f75;
+        --warning: #ffc857;
+        --text: #edf5ff;
+        --muted: #9bb1cb;
+        --border: rgba(255,255,255,0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, #12213c 0%, var(--bg) 55%);
+        color: var(--text);
+      }
+      .container { max-width: 1200px; margin: 0 auto; padding: 32px 20px 48px; }
+      .topbar {
+        display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+        padding: 18px 20px; background: rgba(13, 22, 35, 0.8); border: 1px solid var(--border); border-radius: 16px;
+      }
+      .brand { font-weight: 700; letter-spacing: 0.05em; }
+      .badge { background: rgba(40, 208, 180, 0.12); color: var(--accent); padding: 8px 12px; border-radius: 999px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+      .card {
+        background: linear-gradient(180deg, rgba(18,29,45,0.95), rgba(16,25,36,0.95));
+        border: 1px solid var(--border); border-radius: 18px; padding: 20px;
+        box-shadow: 0 10px 32px rgba(6,10,18,0.35);
+      }
+      .card h3 { margin: 0 0 10px; color: var(--muted); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+      .big { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+      .muted { color: var(--muted); }
+      .status-pill { display: inline-flex; background: rgba(40,208,180,0.1); color: var(--accent); border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+      .two-cols { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 20px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 18px; }
+      th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); }
+      th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+      .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+      button {
+        border: none; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: white;
+      }
+      button.secondary { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text); }
+      .nav { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+      .nav a { color: var(--muted); text-decoration: none; }
+      .nav a:hover { color: var(--text); }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">SECURENET VPN</div>
+        <div class="badge">Painel Administrativo</div>
+      </div>
+
+      <div class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#servers">Servidores</a>
+        <a href="#dns">DNS</a>
+        <a href="#security">Segurança</a>
+        <a href="#integrations">Integrações</a>
+      </div>
+
+      <div class="grid" id="overview">
+        <div class="card">
+          <h3>IP da VPS</h3>
+          <div class="big">203.0.113.10</div>
+          <div class="muted">api.securenet.com</div>
+        </div>
+        <div class="card">
+          <h3>Status da VPN</h3>
+          <div class="status-pill">ONLINE</div>
+          <div class="muted" style="margin-top: 12px;">1284 usuários conectados</div>
+        </div>
+        <div class="card">
+          <h3>Status do DNS</h3>
+          <div class="status-pill">ATIVO</div>
+          <div class="muted" style="margin-top: 12px;">18.4k domínios bloqueados</div>
+        </div>
+        <div class="card">
+          <h3>Tráfego usado</h3>
+          <div class="big">98.4 TB</div>
+          <div class="muted">Média de rede: 144/121 Mbps</div>
+        </div>
+      </div>
+
+      <div class="two-cols" style="margin-top: 24px;">
+        <div class="card">
+          <h3>Monitoramento da VPS</h3>
+          <table>
+            <tbody>
+              <tr><th>CPU</th><td>31%</td></tr>
+              <tr><th>RAM</th><td>58%</td></tr>
+              <tr><th>Armazenamento</th><td>72%</td></tr>
+              <tr><th>Temperatura</th><td>54°C</td></tr>
+              <tr><th>Uptime</th><td>365d 6h 42m</td></tr>
+              <tr><th>Serviços</th><td>VPN/DNS/API/Redis/DB online</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Segurança</h3>
+          <table>
+            <tbody>
+              <tr><th>2FA</th><td>Ativo</td></tr>
+              <tr><th>Rate limiting</th><td>Ativo</td></tr>
+              <tr><th>Firewall</th><td>Ativo</td></tr>
+              <tr><th>Fail2Ban</th><td>Ativo</td></tr>
+              <tr><th>Backups</th><td>Diários</td></tr>
+              <tr><th>JWT</th><td>Curto prazo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="servers" style="margin-top: 24px;">
+        <h3>Servidores regionais</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Região</th>
+              <th>IP</th>
+              <th>Status</th>
+              <th>Usuários</th>
+              <th>Tráfego</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Brasil</td><td>203.0.113.10</td><td>Online</td><td>421</td><td>12 TB</td></tr>
+            <tr><td>Estados Unidos</td><td>198.51.100.10</td><td>Online</td><td>512</td><td>18 TB</td></tr>
+            <tr><td>Canadá</td><td>192.0.2.20</td><td>Online</td><td>289</td><td>9 TB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" id="dns" style="margin-top: 24px;">
+        <h3>Gerenciamento de DNS</h3>
+        <table>
+          <tbody>
+            <tr><th>dns.securenet.com</th><td>Ativo</td></tr>
+            <tr><th>api.securenet.com</th><td>Ativo</td></tr>
+            <tr><th>vpn.securenet.com</th><td>Ativo</td></tr>
+            <tr><th>Cache DNS</th><td>Habilitado</td></tr>
+            <tr><th>Lista de bloqueio</th><td>Ativa</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" id="integrations" style="margin-top: 24px;">
+        <h3>Integração</h3>
+        <table>
+          <tbody>
+            <tr><th>IP da VPS</th><td>XXX.XXX.XXX.XXX</td></tr>
+            <tr><th>API</th><td>https://api.securenet.com</td></tr>
+            <tr><th>Documentação</th><td>https://api.securenet.com/docs</td></tr>
+            <tr><th>OpenAPI</th><td>https://api.securenet.com/openapi.json</td></tr>
+            <tr><th>API Key</th><td>Gerar / Copiar / Revogar</td></tr>
+          </tbody>
+        </table>
+        <div class="actions">
+          <button>Gerar API Key</button>
+          <button class="secondary">Copiar</button>
+          <button class="secondary">Revogar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

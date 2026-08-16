@@ -1,0 +1,22 @@
+{
+  "name": "securenet-platform",
+  "version": "1.0.0",
+  "description": "SecureNet VPN platform - admin panel, API, DNS, VPN, security scanner and docs",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "lint": "node --check server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^11.0.1"
+  }
+}
